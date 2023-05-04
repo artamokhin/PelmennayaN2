@@ -7,4 +7,5 @@ RUN cd /src/cmd/api && go build -o goapp
 FROM alpine:3.17
 WORKDIR /app
 COPY --from=build-env /src/cmd/api/goapp /app/
+EXPOSE 8081
 ENTRYPOINT ./goapp
