@@ -6,5 +6,5 @@ RUN npm install  && npm run build
 
 
 FROM nginx:1.23
-COPY --from=builder /usr/src/app/dist/ /usr/share/nginx/html/momo-store
+COPY --from=builder /usr/src/app/dist/ /usr/share/nginx/html/
 EXPOSE 80

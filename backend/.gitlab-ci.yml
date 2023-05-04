@@ -46,6 +46,7 @@ build-backend:
     - cd backend
     - >
       docker build
+      --no-cache
       --tag $CI_REGISTRY_IMAGE/momo-backend:$CI_COMMIT_SHA
       .
     # Проверка запуска контейнера
