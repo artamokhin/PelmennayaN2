@@ -1,7 +1,7 @@
 # build stage
 FROM golang:1.19-alpine3.16 AS build-env
 ADD . /src
-RUN cd /src && go build -o goapp
+RUN cd /src/cmd/api && go build -o goapp
 
 # final stage
 FROM alpine:3.17
