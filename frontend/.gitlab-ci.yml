@@ -1,0 +1,80 @@
+include:
+#  - template: Security/SAST.gitlab-ci.yml
+  - project: 'templates/ci'
+    file: 'DockerInDockerTemplate.yml'
+    
+stages:
+#  - test
+  - build
+  - release
+  - deploy
+
+build-frontend:
+  stage: build
+  image: docker:20.10.12-dind-rootless
+  before_script:
+    - until docker info; do sleep 1; done
+    - docker login -u $CI_REGISTRY_USER -p $CI_REGISTRY_PASSWORD $CI_REGISTRY
+  script:
+    - cd frontend
+    - >
+      docker build
+      --tag $CI_REGISTRY_IMAGE/momo-frontend:$CI_COMMIT_SHA
+      .
+    - docker push $CI_REGISTRY_IMAGE/momo-frontend:$CI_COMMIT_SHA
+    
+#sonarqube-frontend-sast:
+#  stage: test
+#  only:
+#    changes:
+#    - frontend/*
+#  image:
+#    name: sonarsource/sonar-scanner-cli:latest
+#    entrypoint: [""]
+#  variables:
+#    SONAR_TOKEN: $SonarQubeToken
+#    SONAR_HOST_URL: $SonarQubeUrl
+#    GIT_DEPTH: 0
+#  script:
+#    - cd frontend
+#    - sonar-scanner
+#      -Dsonar.projectKey=$SonarQubeProjectFrontend
+#      -Dsonar.sources=.
+#      -Dsonar.host.url=$SonarQubeUrl
+#      -Dsonar.login=$SonarQubeLogin
+    
+
+upload-frontend-latest:
+  variables:
+    GIT_STRATEGY: none
+  image: docker:20.10.12-dind-rootless
+  stage: release
+  before_script:
+    - until docker info; do sleep 1; done
+    - docker login -u $CI_REGISTRY_USER -p $CI_REGISTRY_PASSWORD $CI_REGISTRY
+  script:
+    - docker pull $CI_REGISTRY_IMAGE/momo-frontend:$CI_COMMIT_SHA
+    - docker tag $CI_REGISTRY_IMAGE/momo-frontend:$CI_COMMIT_SHA $CI_REGISTRY_IMAGE/momo-frontend:latest
+    - docker push $CI_REGISTRY_IMAGE/momo-frontend:latest
+
+
+deploy-frontend:
+  stage: deploy
+  image: alpine:3.15.0
+  # если хотим сделать деплой по кнопке
+#  rules:
+#    - if: '$CI_PIPELINE_SOURCE == "merge_request_event"'
+#      when: manual
+#    - if: '$CI_COMMIT_BRANCH == "master"'
+#      when: manual
+  before_script:
+    - apk add openssh-client bash
+    - eval $(ssh-agent -s)
+    - echo "$SSH_PRIVATE_KEY" | tr -d '\r' | ssh-add -
+    - mkdir -p ~/.ssh
+    - chmod 700 ~/.ssh
+    - echo "$SSH_KNOWN_HOSTS" >> ~/.ssh/known_hosts
+    - chmod 644 ~/.ssh/known_hosts
+  script:
+    - ssh ${DEV_USER}@${DEV_HOST}
+      "/bin/bash -s " < ./frontend/frontend_deploy.sh

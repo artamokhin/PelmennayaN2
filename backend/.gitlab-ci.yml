@@ -1,0 +1,99 @@
+include:
+#  - template: Security/SAST.gitlab-ci.yml
+  - project: 'templates/ci'
+    file: 'DockerInDockerTemplate.yml'
+    
+stages:
+#  - test
+  - build
+  - release
+  - deploy
+
+
+#spotbugs-sast:
+#  stage: test
+#  variables:
+##    COMPILE: "true"
+##    SAST_JAVA_VERSION: 17
+#
+#
+#sonarqube-backend-sast:
+#  stage: test
+#  cache:
+#    key: "$CI_COMMIT_REF_SLUG"
+#    paths:
+#      - .m2/repository
+#  only:
+#    changes:
+#    - backend/*
+#  image: maven:3.8-openjdk-16
+#  script:
+#    - cd backend
+#    - >
+#      mvn verify sonar:sonar -Dsonar.qualitygate.wait=true
+#      -Dsonar.projectKey=$SonarQubeProjectBackend
+#      -Dsonar.host.url=$SonarQubeUrl
+#      -Dsonar.login=$SonarQubeLogin
+
+
+build-backend:
+  stage: build
+  image: docker:20.10.12-dind-rootless
+  before_script:
+    - until docker info; do sleep 1; done
+    - docker login -u $CI_REGISTRY_USER -p $CI_REGISTRY_PASSWORD $CI_REGISTRY
+  script:
+    - cd backend
+    - >
+      docker build
+      --tag $CI_REGISTRY_IMAGE/momo-backend:$CI_COMMIT_SHA
+      .
+    # Проверка запуска контейнера
+#    - docker run --rm -d --env-file .env --name momo-backend -p 8080:8080 $CI_REGISTRY_IMAGE/momo-backend:$CI_COMMIT_SHA
+#    # Ждем пока запустится контейнер
+#    - sleep 15
+#    # Скачиваем список сосисок
+#    - wget -O products.txt localhost:8080/api/products
+#    # Проверяем что сосиски на месте
+#    - grep -q "Сливочная" <(cat products.txt) || exit 1
+#    # Проверяем запущен ли наш сервис (в образе нет curl и нет прав на его установку)
+#    #- grep -q "Сливочная" <(curl -s localhost:8080/api/products) || exit 1
+    - docker push $CI_REGISTRY_IMAGE/momo-backend:$CI_COMMIT_SHA
+
+    
+
+upload-backend-latest:
+  variables:
+    GIT_STRATEGY: none
+  image: docker:20.10.12-dind-rootless
+  stage: release
+  before_script:
+    - until docker info; do sleep 1; done
+    - docker login -u $CI_REGISTRY_USER -p $CI_REGISTRY_PASSWORD $CI_REGISTRY
+  script:
+    - docker pull $CI_REGISTRY_IMAGE/momo-backend:$CI_COMMIT_SHA
+    # если образ прошел проверки в CI (сканирование, тесты и т.д), то тегаем latest
+    - docker tag $CI_REGISTRY_IMAGE/momo-backend:$CI_COMMIT_SHA $CI_REGISTRY_IMAGE/momo-backend:latest
+    - docker push $CI_REGISTRY_IMAGE/momo-backend:latest
+
+deploy-backend:
+  stage: deploy
+  image: alpine:3.15.0
+  # если хотим сделать деплой по кнопке
+#  rules:
+#    - if: '$CI_PIPELINE_SOURCE == "merge_request_event"'
+#      when: manual
+#    - if: '$CI_COMMIT_BRANCH == "master"'
+#      when: manual
+  before_script:
+    - apk add openssh-client bash
+    - eval $(ssh-agent -s)
+    - echo "$SSH_PRIVATE_KEY" | tr -d '\r' | ssh-add -
+    - mkdir -p ~/.ssh
+    - chmod 700 ~/.ssh
+    - echo "$SSH_KNOWN_HOSTS" >> ~/.ssh/known_hosts
+    - chmod 644 ~/.ssh/known_hosts
+  script:
+    - ssh ${DEV_USER}@${DEV_HOST}
+      "/bin/bash -s " < ./backend/backend_deploy.sh
+      
