@@ -6,7 +6,7 @@ docker stop momo-frontend || true
 docker rm momo-frontend || true
 set -e
 docker run -d --name momo-frontend \
-    --network=momo_network \
+    --network=momo_network -p 80:80\
     --restart always \
     --pull always \
     --env-file .env \
