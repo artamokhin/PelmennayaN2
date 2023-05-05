@@ -1,5 +1,9 @@
 #!/bin/bash
 set +e
+cat > .env <<EOF
+NODE_ENV=production
+VUE_APP_API_URL=http://momo-backend:8081
+EOF
 docker network create -d bridge momo_network || true
 docker pull gitlab.praktikum-services.ru:5050/std-012-056/momo-store/momo-frontend:latest
 docker stop momo-frontend || true
