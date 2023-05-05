@@ -1,5 +1,8 @@
 #!/bin/bash
 set +e
+cat > .env <<EOF
+VUE_APP_API_URL=http://158.160.34.207:8081
+EOF
 docker network create -d bridge momo_network || true
 docker pull gitlab.praktikum-services.ru:5050/std-012-056/momo-store/momo-frontend:latest
 docker stop momo-frontend || true
@@ -9,4 +12,5 @@ docker run -d --name momo-frontend \
     --network=momo_network -p 80:80\
     --restart always \
     --pull always \
+    --env .env
     gitlab.praktikum-services.ru:5050/std-012-056/momo-store/momo-frontend:latest
