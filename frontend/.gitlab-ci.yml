@@ -9,21 +9,7 @@ stages:
   - release
   - deploy
 
-build-frontend:
-  stage: build
-  image: docker:20.10.12-dind-rootless
-  before_script:
-    - until docker info; do sleep 1; done
-    - docker login -u $CI_REGISTRY_USER -p $CI_REGISTRY_PASSWORD $CI_REGISTRY
-  script:
-    - cd frontend
-    - >
-      docker build
-      --no-cache
-      --tag $CI_REGISTRY_IMAGE/momo-frontend:$CI_COMMIT_SHA
-      .
-    - docker push $CI_REGISTRY_IMAGE/momo-frontend:$CI_COMMIT_SHA
-    
+
 #sonarqube-frontend-sast:
 #  stage: test
 #  only:
@@ -44,6 +30,22 @@ build-frontend:
 #      -Dsonar.host.url=$SonarQubeUrl
 #      -Dsonar.login=$SonarQubeLogin
     
+
+build-frontend:
+  stage: build
+  image: docker:20.10.12-dind-rootless
+  before_script:
+    - until docker info; do sleep 1; done
+    - docker login -u $CI_REGISTRY_USER -p $CI_REGISTRY_PASSWORD $CI_REGISTRY
+  script:
+    - cd frontend
+    - >
+      docker build
+      --no-cache
+      --tag $CI_REGISTRY_IMAGE/momo-frontend:$CI_COMMIT_SHA
+      .
+    - docker push $CI_REGISTRY_IMAGE/momo-frontend:$CI_COMMIT_SHA
+
 
 upload-frontend-latest:
   variables:
