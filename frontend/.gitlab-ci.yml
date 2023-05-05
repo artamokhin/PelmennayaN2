@@ -1,34 +1,34 @@
 include:
-#  - template: Security/SAST.gitlab-ci.yml
+  - template: Security/SAST.gitlab-ci.yml
   - project: 'templates/ci'
     file: 'DockerInDockerTemplate.yml'
     
 stages:
-#  - test
+  - test
   - build
   - release
   - deploy
 
 
-#sonarqube-frontend-sast:
-#  stage: test
-#  only:
-#    changes:
-#    - frontend/*
-#  image:
-#    name: sonarsource/sonar-scanner-cli:latest
-#    entrypoint: [""]
-#  variables:
-#    SONAR_TOKEN: $SonarQubeToken
-#    SONAR_HOST_URL: $SonarQubeUrl
-#    GIT_DEPTH: 0
-#  script:
-#    - cd frontend
-#    - sonar-scanner
-#      -Dsonar.projectKey=$SonarQubeProjectFrontend
-#      -Dsonar.sources=.
-#      -Dsonar.host.url=$SonarQubeUrl
-#      -Dsonar.login=$SonarQubeLogin
+sonarqube-frontend-sast:
+  stage: test
+  only:
+    changes:
+    - frontend/*
+  image:
+    name: sonarsource/sonar-scanner-cli:latest
+    entrypoint: [""]
+  variables:
+    SONAR_TOKEN: $SonarQubeToken
+    SONAR_HOST_URL: $SonarQubeUrl
+    GIT_DEPTH: 0
+  script:
+    - cd frontend
+    - sonar-scanner
+      -Dsonar.projectKey=$SonarQubeProjectFrontend
+      -Dsonar.sources=.
+      -Dsonar.host.url=$SonarQubeUrl
+      -Dsonar.login=$SonarQubeLogin
     
 
 build-frontend:
