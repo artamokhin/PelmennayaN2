@@ -2,13 +2,11 @@ include:
   - project: 'templates/ci'
     file: 'DockerInDockerTemplate.yml'
 
-
 stages:
   - test
   - build
   - release
   - deploy
-
 
 sonarqube-frontend-sast:
   stage: test
