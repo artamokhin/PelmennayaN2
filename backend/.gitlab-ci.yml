@@ -1,39 +1,32 @@
 include:
-#  - template: Security/SAST.gitlab-ci.yml
+  - template: Security/SAST.gitlab-ci.yml
   - project: 'templates/ci'
     file: 'DockerInDockerTemplate.yml'
     
 stages:
-#  - test
+  - test
   - build
   - release
   - deploy
 
 
-#spotbugs-sast:
-#  stage: test
-#  variables:
-##    COMPILE: "true"
-##    SAST_JAVA_VERSION: 17
-#
-#
-#sonarqube-backend-sast:
-#  stage: test
-#  cache:
-#    key: "$CI_COMMIT_REF_SLUG"
-#    paths:
-#      - .m2/repository
-#  only:
-#    changes:
-#    - backend/*
-#  image: maven:3.8-openjdk-16
-#  script:
-#    - cd backend
-#    - >
-#      mvn verify sonar:sonar -Dsonar.qualitygate.wait=true
-#      -Dsonar.projectKey=$SonarQubeProjectBackend
-#      -Dsonar.host.url=$SonarQubeUrl
-#      -Dsonar.login=$SonarQubeLogin
+sonarqube-backend-sast:
+  stage: test
+  cache:
+    key: "${CI_JOB_NAME}"
+    paths:
+      - .sonar/cache
+  only:
+    changes:
+    - backend/*
+  image: sonarsource/sonar-scanner-cli:latest
+  script:
+    - cd backend
+    - sonar-scanner
+      -Dsonar.projectKey=$SonarQubeProjectMomoBackend
+      -Dsonar.sources=.
+      -Dsonar.host.url=$SonarQubeUrl
+      -Dsonar.login=$SonarQubeLogin
 
 
 build-backend:
