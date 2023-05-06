@@ -6,5 +6,5 @@ RUN npm install  && NODE_ENV=production VUE_APP_API_URL=http://localhost:8081 np
 
 
 FROM nginx:1.23
-COPY --from=builder /usr/src/app/dist/momo-store /usr/share/nginx/html/
+COPY --from=builder /usr/src/app/dist/momo-store/ /usr/share/nginx/html/
 EXPOSE 80
