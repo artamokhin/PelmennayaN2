@@ -58,6 +58,14 @@ upload-frontend-latest:
     - docker login -u $CI_REGISTRY_USER -p $CI_REGISTRY_PASSWORD $CI_REGISTRY
   script:
     - docker pull $CI_REGISTRY_IMAGE/momo-frontend:$CI_COMMIT_SHA
+    # Проверка запуска контейнера
+    - docker run --rm -d --name momo-frontend -p 80:80 $CI_REGISTRY_IMAGE/momo-frontend:$CI_COMMIT_SHA
+    # Ждем пока запустится контейнер
+    - sleep 15
+    # Скачиваем список пельменей
+    - wget -O products.txt localhost:80
+    # Проверяем что пельмени на месте
+    - grep -q "Пельменная" <(cat products.txt) || exit 1
     - docker tag $CI_REGISTRY_IMAGE/momo-frontend:$CI_COMMIT_SHA $CI_REGISTRY_IMAGE/momo-frontend:latest
     - docker push $CI_REGISTRY_IMAGE/momo-frontend:latest
 
