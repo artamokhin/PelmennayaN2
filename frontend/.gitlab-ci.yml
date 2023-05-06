@@ -25,7 +25,7 @@ sonarqube-frontend-sast:
   script:
     - cd frontend
     - sonar-scanner
-      -Dsonar.projectKey=$SonarQubeProjectFrontend
+      -Dsonar.projectKey=$SonarQubeProjectMomo
       -Dsonar.sources=.
       -Dsonar.host.url=$SonarQubeUrl
       -Dsonar.login=$SonarQubeLogin
