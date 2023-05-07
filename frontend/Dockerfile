@@ -6,6 +6,7 @@ RUN npm install  && NODE_ENV=1production npm run build
 
 
 FROM nginx:1.23
+COPY ./nginx/nginx.conf /etc/nginx/nginx.conf
 COPY ./nginx/default.conf /etc/nginx/conf.d/default.conf
 COPY --from=builder /usr/src/app/dist/ /usr/share/nginx/html/
 EXPOSE 80
