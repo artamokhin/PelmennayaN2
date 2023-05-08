@@ -1,0 +1,42 @@
+# values.yaml
+backend: # Это имя чарта из dependencies
+  # Вместо latest правильнее использовать версию .Chart.AppVersion в шаблоне
+  image: gitlab.praktikum-services.ru:5050/std-012-056/sausage-store/sausage-backend
+  tag: latest
+  replicas: 1
+  resources:
+    requests:
+      memory: "125Mi"
+      cpu: 0.1
+    limits:
+      memory: "250Mi"
+      cpu: 0.2
+  vault_IP: 158.160.34.207
+  environment: production
+
+backend-report:
+  image: gitlab.praktikum-services.ru:5050/std-012-056/sausage-store/sausage-report
+  tag: latest
+  replicas: 1
+  resources:
+    requests:
+      memory: "125Mi"
+      cpu: 0.1
+    limits:
+      memory: "250Mi"
+      cpu: 0.2
+  environment: production
+
+frontend:
+  image: gitlab.praktikum-services.ru:5050/std-012-056/sausage-store/sausage-nginx
+  tag: latest
+  replicas: 1
+  ingresshost: "artamokhin-aleksandr-12.k8s.praktikum-services.tech"
+  resources:
+    requests:
+      memory: "125Mi"
+      cpu: 0.1
+    limits:
+      memory: "250Mi"
+      cpu: 0.2
+  environment: production
