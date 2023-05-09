@@ -35,8 +35,8 @@ data:
             try_files $uri $uri/ /index.html;
           }
         
-          location /api {
-              proxy_pass http://backend:8080;
+          location ~ ^(/categories|/auth|/products) {
+              proxy_pass http://backend:8081;
           }
 
           error_page   500 502 503 504  /50x.html;
