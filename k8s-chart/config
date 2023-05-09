@@ -17,4 +17,3 @@ users:
 - name: admin-user
   user:
     token: ***REMOVED***
-
