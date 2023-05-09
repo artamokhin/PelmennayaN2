@@ -1,0 +1,20 @@
+apiVersion: v1
+clusters:
+- cluster:
+    certificate-authority-data: ***REMOVED***
+    server: https://158.160.57.227
+  name: yc-managed-k8s-cat1te81ghlbqgo4evhk
+contexts:
+- context:
+    cluster: yc-managed-k8s-cat1te81ghlbqgo4evhk
+    namespace: default
+    user: admin-user
+  name: yc-momo-store-artamokhin
+current-context: yc-momo-store-artamokhin
+kind: Config
+preferences: {}
+users:
+- name: admin-user
+  user:
+    token: ***REMOVED***
+
