@@ -14,6 +14,7 @@ metadata:
     app.kubernetes.io/part-of: momo-store
     env: "{{ .Values.environment }}"
 
+
 spec:
   replicas: {{ .Values.replicas }}
   revisionHistoryLimit: 15
