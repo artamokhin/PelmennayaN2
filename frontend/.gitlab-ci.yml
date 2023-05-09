@@ -66,18 +66,35 @@ upload-frontend-latest:
     - docker tag $CI_REGISTRY_IMAGE/momo-frontend:$CI_COMMIT_SHA $CI_REGISTRY_IMAGE/momo-frontend:latest
     - docker push $CI_REGISTRY_IMAGE/momo-frontend:latest
 
-
 deploy-frontend:
   stage: deploy
-  image: alpine:3.15.0
-  before_script:
-    - apk add openssh-client bash
-    - eval $(ssh-agent -s)
-    - echo "$SSH_PRIVATE_KEY" | tr -d '\r' | ssh-add -
-    - mkdir -p ~/.ssh
-    - chmod 700 ~/.ssh
-    - echo "$SSH_KNOWN_HOSTS" >> ~/.ssh/known_hosts
-    - chmod 644 ~/.ssh/known_hosts
+  image: alpine/k8s:1.24.12
+  only:
+    changes:
+      - frontend/*
   script:
-    - ssh ${DEV_USER}@${DEV_HOST}
-      "/bin/bash -s " < ./frontend/frontend_deploy.sh
+    - mkdir ~/.kube
+    - echo ${kubeconfig} | base64 -d > ~/.kube/config
+    - cd k8s-chart
+    - helm package ./ --version "1.0.${CI_PIPELINE_ID}"
+    - curl -u $NEXUS_REPO_USER:$NEXUS_REPO_PASS $NEXUS_HELM_REPO --upload-file momo-store-1.0.${CI_PIPELINE_ID}.tgz
+    - helm repo add nexus $NEXUS_HELM_REPO --username $NEXUS_REPO_USER --password $NEXUS_REPO_PASS
+    - helm repo update
+    - helm upgrade --install --set environment=test --atomic --timeout 15m momo-store nexus/momo-store
+    - rm ~/.kube/config
+
+
+#deploy-frontend:
+#  stage: deploy
+#  image: alpine:3.15.0
+#  before_script:
+#    - apk add openssh-client bash
+#    - eval $(ssh-agent -s)
+#    - echo "$SSH_PRIVATE_KEY" | tr -d '\r' | ssh-add -
+#    - mkdir -p ~/.ssh
+#    - chmod 700 ~/.ssh
+#    - echo "$SSH_KNOWN_HOSTS" >> ~/.ssh/known_hosts
+#    - chmod 644 ~/.ssh/known_hosts
+#  script:
+#    - ssh ${DEV_USER}@${DEV_HOST}
+#      "/bin/bash -s " < ./frontend/frontend_deploy.sh
