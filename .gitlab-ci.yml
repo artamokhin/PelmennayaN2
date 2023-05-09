@@ -20,13 +20,4 @@ backend:
   only:
     changes:
       - backend/**/*
-
-infrastructure:
-  stage: module-pipelines
-  trigger:
-    include:
-      - "/k8s-chart/.gitlab-ci.yml"
-    strategy: depend
-  only:
-    changes:
       - k8s-chart/**/*
