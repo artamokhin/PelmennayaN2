@@ -2,10 +2,10 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: momo-frontend
+  name: frontend
   namespace: {{ .Release.Namespace }}
   labels:
-    app.kubernetes.io/name: momo-frontend
+    app.kubernetes.io/name: frontend
     app.kubernetes.io/instance: "{{ .Release.Name }}"
     app.kubernetes.io/version: "{{ .Chart.AppVersion }}"
     app.kubernetes.io/managed-by: {{ .Release.Service }}
@@ -79,7 +79,7 @@ spec:
   scaleTargetRef:
     apiVersion: apps/v1
     kind: Deployment
-    name: momo-frontend
+    name: frontend
   metrics:
     - type: Resource
       resource:
