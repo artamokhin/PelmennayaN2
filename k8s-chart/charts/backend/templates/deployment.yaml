@@ -30,10 +30,6 @@ spec:
       app: backend
   template:
     metadata:
-#      annotations:
-#        prometheus.io/path: /actuator/prometheus
-#        prometheus.io/port: "8080"
-#        prometheus.io/scrape: "true"
       labels:
         app: backend
     spec:
@@ -43,51 +39,34 @@ spec:
           imagePullPolicy: Always
           resources:
 {{ toYaml .Values.resources | indent 12 }}
-#          env:
-#            - name: spring.cloud.vault.host
-#              value: {{ .Values.vault_IP }}
-#            - name: spring.cloud.vault.token
-#              valueFrom:
-#                secretKeyRef:
-#                  name: vault
-#                  key: vault_token
-#            - name: REPORT_PATH
-#              value: ./logs
           ports:
             - name: backend
               containerPort: 8081
-#          livenessProbe:
-#            httpGet:
-#              path: /actuator/health
-#              port: 8080
-#            initialDelaySeconds: 15
-#            periodSeconds: 30
-#            timeoutSeconds: 1
-#            failureThreshold: 6
+
       imagePullSecrets:
         - name: docker-config-secret
 
 
-#---
-#apiVersion: autoscaling.k8s.io/v1
-#kind: VerticalPodAutoscaler
-#metadata:
-#  name: backend
-#spec:
-#  targetRef:
-#    apiVersion: "apps/v1"
-#    kind: Deployment
-#    name: backend
-#  updatePolicy:
-#    updateMode: "Auto"
-#  resourcePolicy:
-#    containerPolicies:
-#      - containerName: "*"
-#        minAllowed:
-#          cpu: 0m
-#          memory: 0Mi
-#        maxAllowed:
-#          cpu: 1
-#          memory: 500Mi
-#        controlledResources: ["cpu", "memory"]
-#        controlledValues: RequestsAndLimits
+---
+apiVersion: autoscaling.k8s.io/v1
+kind: VerticalPodAutoscaler
+metadata:
+  name: backend-vpa
+spec:
+  targetRef:
+    apiVersion: "apps/v1"
+    kind: Deployment
+    name: backend
+  updatePolicy:
+    updateMode: "Auto"
+  resourcePolicy:
+    containerPolicies:
+      - containerName: "*"
+        minAllowed:
+          cpu: 0m
+          memory: 0Mi
+        maxAllowed:
+          cpu: 1
+          memory: 500Mi
+        controlledResources: ["cpu", "memory"]
+        controlledValues: RequestsAndLimits
