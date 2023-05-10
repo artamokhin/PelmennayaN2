@@ -30,6 +30,10 @@ spec:
       app: backend
   template:
     metadata:
+      annotations:
+        prometheus.io/path: /metrics
+        prometheus.io/port: "8081"
+        prometheus.io/scrape: "true"
       labels:
         app: backend
     spec:
@@ -42,7 +46,10 @@ spec:
           ports:
             - name: backend
               containerPort: 8081
-
+          livenessProbe:
+            httpGet:
+              path: /health
+              port: 8081
       imagePullSecrets:
         - name: docker-config-secret
 

@@ -19,7 +19,7 @@ server {
     try_files $uri $uri/ /index.html;
   }
 
-  location ~ ^(/categories|/auth|/products) {
+  location ~ ^(/categories|/auth|/products|/orders) {
       proxy_pass http://{{ $host }};
   }
 }
