@@ -31,6 +31,9 @@ sonarqube-frontend-sast:
 
 build-frontend:
   stage: build
+  only:
+    changes:
+      - frontend/*
   image: docker:20.10.12-dind-rootless
   before_script:
     - until docker info; do sleep 1; done
@@ -48,6 +51,9 @@ build-frontend:
 upload-frontend-latest:
   variables:
     GIT_STRATEGY: none
+  only:
+    changes:
+      - frontend/*
   image: docker:20.10.12-dind-rootless
   stage: release
   before_script:

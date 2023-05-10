@@ -67,7 +67,7 @@ spec:
                 path: nginx.conf
                 
 ---
-apiVersion: autoscaling/v2beta2
+apiVersion: autoscaling/v2
 kind: HorizontalPodAutoscaler
 metadata:
   name: frontend-hpa
