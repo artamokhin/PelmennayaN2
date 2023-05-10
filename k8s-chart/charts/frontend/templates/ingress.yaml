@@ -3,6 +3,8 @@ apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
   name: frontend
+  annotations:
+    ingress.alb.yc.io/external-ipv4-address: auto
 spec:
   # В кластере может быть несколько Ingress Controllers, мы используем NGINX.
   ingressClassName: "nginx"
