@@ -18,7 +18,7 @@ frontend:
   image: gitlab.praktikum-services.ru:5050/std-012-056/momo-store/momo-frontend
   tag: latest
   replicas: 1
-  ingresshost: "158.160.57.227.nip.io"
+  ingresshost: "158.160.61.203.nip.io"
   resources:
     requests:
       memory: "125Mi"

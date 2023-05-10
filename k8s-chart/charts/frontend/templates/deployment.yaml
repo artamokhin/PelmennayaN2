@@ -14,7 +14,6 @@ metadata:
     app.kubernetes.io/part-of: momo-store
     env: "{{ .Values.environment }}"
 
-
 spec:
   revisionHistoryLimit: 15
   replicas: {{ .Values.replicas }}
@@ -47,15 +46,6 @@ spec:
           ports:
             - name: frontend
               containerPort: 80
-#      affinity:
-#        nodeAffinity:
-#          requiredDuringSchedulingIgnoredDuringExecution:
-#            nodeSelectorTerms:
-#              - matchExpressions:
-#                  - key: app
-#                    operator: In
-#                    values:
-#                      - frontend
       imagePullSecrets:
         - name: docker-config-secret
       volumes:
