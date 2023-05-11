@@ -17,7 +17,7 @@ sonarqube-backend-sast:
       - .sonar/cache
   only:
     changes:
-    - backend/*
+    - backend/**/*
   image: sonarsource/sonar-scanner-cli:latest
   script:
     - cd backend
@@ -32,7 +32,7 @@ build-backend:
   stage: build
   only:
     changes:
-      - backend/*
+      - backend/**/*
   image: docker:20.10.12-dind-rootless
   before_script:
     - until docker info; do sleep 1; done
@@ -78,7 +78,7 @@ deploy-backend:
   image: alpine/k8s:1.24.12
   only:
     changes:
-      - backend/*
+      - backend/**/*
       - k8s-chart/**/*
   script:
     - mkdir ~/.kube

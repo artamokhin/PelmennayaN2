@@ -1,0 +1,33 @@
+---
+groups:
+  - name: Momo store rules
+    rules:
+    - alert: InstanceDown
+      expr: up{app="backend"} == 0
+      for: 1m
+      labels:
+        severity: critical
+        project: "sausage_store"
+        component: "Backend"
+        rules:
+#    - alert: Error 500
+#      expr: rate(http_server_requests_seconds_count{status="500"}[1m]) > 0
+#      for: 1m
+#      labels:
+#        severity: critical
+#        project: "sausage_store"
+#        component: "Backend"
+#    - alert: Delay more than 100ms
+#      expr: histogram_quantile(0.95, sum by (le) (rate(http_server_requests_seconds_bucket{method="POST",status=~"2..",uri="/api/orders"}[5m]))) > 0.1
+#      for: 1m
+#      labels:
+#        severity: critical
+#        project: "sausage_store"
+#        component: "Backend"
+#    - alert: Error /actuator/prometheus
+#      expr: rate(http_server_requests_seconds_count{status=~"4..",uri="/actuator/prometheus"}[2m]) > 0
+#      for: 1m
+#      labels:
+#        severity: critical
+#        project: "sausage_store"
+#        component: "Backend"
