@@ -22,6 +22,6 @@ frontend:
       memory: "100Mi"
       cpu: 0.1
     limits:
-      memory: "200Mi"
-      cpu: 0.3
+      memory: "250Mi"
+      cpu: 0.5
   environment: production
