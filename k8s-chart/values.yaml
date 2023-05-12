@@ -4,10 +4,10 @@ backend:
   replicas: 1
   resources:
     requests:
-      memory: "125Mi"
+      memory: "50Mi"
       cpu: 0.1
     limits:
-      memory: "200Mi"
+      memory: "100Mi"
       cpu: 0.2
   environment: production
 
@@ -19,9 +19,9 @@ frontend:
   ingresshost: "130.193.37.242.nip.io"
   resources:
     requests:
-      memory: "125Mi"
+      memory: "100Mi"
       cpu: 0.1
     limits:
-      memory: "300Mi"
-      cpu: 0.5
+      memory: "200Mi"
+      cpu: 0.3
   environment: production
