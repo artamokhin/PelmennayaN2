@@ -11,7 +11,7 @@ metadata:
     nginx.ingress.kubernetes.io/rewrite-target: /
 spec:
   rules:
-  - host: "{{ .Release.Namespace }}-alertmanager.k8s.praktikum-services.tech"
+  - host: "alertmanager.130.193.37.242.nip.io"
     http:
       paths:
       - path: /

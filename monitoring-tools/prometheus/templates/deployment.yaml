@@ -56,6 +56,9 @@ spec:
           mountPath: /etc/prometheus/
           readOnly: true
         resources:
+          requests:
+            cpu: 100m
+            memory: 250Mi
           limits:
-            cpu: 1
-            memory: 1Gi
+            cpu: 500m
+            memory: 500Mi

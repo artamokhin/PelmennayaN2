@@ -53,27 +53,48 @@ spec:
       imagePullSecrets:
         - name: docker-config-secret
 
-
 ---
-apiVersion: autoscaling.k8s.io/v1
-kind: VerticalPodAutoscaler
+apiVersion: autoscaling/v2
+kind: HorizontalPodAutoscaler
 metadata:
-  name: backend-vpa
+  name: backend-hpa
+  labels:
+    app: backend-hpa
 spec:
-  targetRef:
-    apiVersion: "apps/v1"
+  minReplicas: 1
+  maxReplicas: 5
+  scaleTargetRef:
+    apiVersion: apps/v1
     kind: Deployment
     name: backend
-  updatePolicy:
-    updateMode: "Auto"
-  resourcePolicy:
-    containerPolicies:
-      - containerName: "*"
-        minAllowed:
-          cpu: 0m
-          memory: 0Mi
-        maxAllowed:
-          cpu: 1
-          memory: 500Mi
-        controlledResources: ["cpu", "memory"]
-        controlledValues: RequestsAndLimits
+  metrics:
+    - type: Resource
+      resource:
+        name: cpu
+        target:
+          type: Utilization
+          averageUtilization: 75
+          
+#---
+#apiVersion: autoscaling.k8s.io/v1
+#kind: VerticalPodAutoscaler
+#metadata:
+#  name: backend-vpa
+#spec:
+#  targetRef:
+#    apiVersion: "apps/v1"
+#    kind: Deployment
+#    name: backend
+#  updatePolicy:
+#    updateMode: "Auto"
+#  resourcePolicy:
+#    containerPolicies:
+#      - containerName: "*"
+#        minAllowed:
+#          cpu: 0m
+#          memory: 0Mi
+#        maxAllowed:
+#          cpu: 1
+#          memory: 500Mi
+#        controlledResources: ["cpu", "memory"]
+#        controlledValues: RequestsAndLimits
