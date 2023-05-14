@@ -11,6 +11,7 @@ spec:
   tls:
     - hosts:
         - {{ .Values.ingresshost }}
+        secretName: letsencrypt
     # Хост определяет правило направления трафика по доменному имени
   rules:
     - host: {{ .Values.ingresshost }}
