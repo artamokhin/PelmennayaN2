@@ -10,9 +10,9 @@ spec:
   # В кластере может быть несколько Ingress Controllers, мы используем NGINX.
   ingressClassName: "nginx"
   tls:
-    - hosts:
+     hosts:
         - {{ .Values.ingresshost }}
-      secretName: letsencrypt
+     secretName: letsencrypt
     # Хост определяет правило направления трафика по доменному имени
   rules:
     - host: {{ .Values.ingresshost }}
