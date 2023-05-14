@@ -4,7 +4,9 @@ kind: Ingress
 metadata:
   name: frontend
   annotations:
+    kubernetes.io/ingress.class: "nginx"
     ingress.alb.yc.io/external-ipv4-address: auto
+    cert-manager.io/cluster-issuer: "letsencrypt"
 spec:
   # В кластере может быть несколько Ingress Controllers, мы используем NGINX.
   ingressClassName: "nginx"
