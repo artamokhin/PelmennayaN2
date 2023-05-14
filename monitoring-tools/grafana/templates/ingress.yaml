@@ -11,7 +11,7 @@ metadata:
     nginx.ingress.kubernetes.io/rewrite-target: /
 spec:
   rules:
-  - host: "grafana.130.193.37.242.nip.io"
+  - host: "grafana.momo-store.cloudns.ph"
     http:
       paths:
       - path: /
