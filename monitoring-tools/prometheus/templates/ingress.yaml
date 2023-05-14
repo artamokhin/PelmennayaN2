@@ -10,6 +10,10 @@ metadata:
     kubernetes.io/ingress.class: "nginx"
     nginx.ingress.kubernetes.io/rewrite-target: /
 spec:
+  ingressClassName: "nginx"
+  tls:
+    - hosts:
+        - "prometheus.momo-store.cloudns.ph"
   rules:
   - host: "prometheus.momo-store.cloudns.ph"
     http:

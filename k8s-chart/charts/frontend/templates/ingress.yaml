@@ -8,9 +8,9 @@ metadata:
 spec:
   # В кластере может быть несколько Ingress Controllers, мы используем NGINX.
   ingressClassName: "nginx"
-#  tls:
-#    - hosts:
-#        - {{ .Values.ingresshost }}
+  tls:
+    - hosts:
+        - {{ .Values.ingresshost }}
     # Хост определяет правило направления трафика по доменному имени
   rules:
     - host: {{ .Values.ingresshost }}
