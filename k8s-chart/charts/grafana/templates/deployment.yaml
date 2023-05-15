@@ -45,7 +45,7 @@ spec:
           resources:
 {{ toYaml .Values.resources | indent 12}}
           args:
-            - "--admin-password=${GrafanaPass}"
+            - {{ .Values.passwd}}
           volumeMounts:
             - mountPath: /var/lib/grafana
               name: grafana-pv
