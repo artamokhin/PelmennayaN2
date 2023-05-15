@@ -25,7 +25,7 @@ data:
       - name: "telegram"
         telegram_configs:
           - send_resolved: true
-            bot_token: {{ .Values.bot_token }}
-            chat_id: {{ .Values.chat_id }}
+            bot_token: {{ $bot_token }}
+            chat_id: {{ $chat_id }}
             parse_mode: ''
             message: "{{ "{{" }} range .Alerts {{ "}}" }}{{ "{{" }} .Annotations.summary {{ "}}" }}\n{{ "{{" }} .Annotations.description }}\n{{ "{{" }} end {{ "}}" }}"
