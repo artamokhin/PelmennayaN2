@@ -38,7 +38,6 @@ prometheus:
 
 grafana:
   ingresshost: "grafana.momo-store.cloudns.ph"
-  passwd: "--admin-password=DevOps123!"
   resources:
     requests:
       cpu: 0.1
