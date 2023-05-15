@@ -49,7 +49,7 @@ grafana:
 alertmanager:
   ingresshost: "alertmanager.momo-store.cloudns.ph"
   bot_token: ***REMOVED***
-  chat_id: -1001839618964
+  chat_id: ${chat_id}
   resources:
     requests:
       cpu: 0.1
