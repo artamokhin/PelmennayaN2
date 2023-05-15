@@ -89,5 +89,5 @@ deploy-backend:
     - helm repo add nexus $NEXUS_HELM_REPO --username $NEXUS_REPO_USER --password $NEXUS_REPO_PASS
     - helm repo update
     - echo ${chat_id}
-    - helm upgrade --install --atomic --timeout 5m --set chat-id=${chat_id} --set bot-token=${bot_token} --set dockerconfigjson=${dockerconfigjson} --set GrafanaPass=${GrafanaPass} momo-store nexus/momo-store
+    - helm upgrade --set chat-id=${chat_id} --set bot-token=${bot_token} --set dockerconfigjson=${dockerconfigjson} --install --atomic --timeout 5m momo-store nexus/momo-store
     - rm ~/.kube/config
