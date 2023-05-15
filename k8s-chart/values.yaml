@@ -1,7 +1,7 @@
 backend:
   image: gitlab.praktikum-services.ru:5050/std-012-056/momo-store/momo-backend
   tag: latest
-  replicas: 1
+  replicas: 2
   resources:
     requests:
       memory: "50Mi"
@@ -15,7 +15,7 @@ backend:
 frontend:
   image: gitlab.praktikum-services.ru:5050/std-012-056/momo-store/momo-frontend
   tag: latest
-  replicas: 1
+  replicas: 2
   ingresshost: "momo-store.cloudns.ph"
   resources:
     requests:
@@ -25,3 +25,35 @@ frontend:
       memory: "250Mi"
       cpu: 0.5
   environment: production
+
+prometheus:
+  ingresshost: "prometheus.momo-store.cloudns.ph"
+  resources:
+    requests:
+      cpu: 0.1
+      memory: 100Mi
+    limits:
+      cpu: 0.2
+      memory: 200Mi
+
+grafana:
+  ingresshost: "grafana.momo-store.cloudns.ph"
+  resources:
+    requests:
+      cpu: 0.1
+      memory: 100Mi
+    limits:
+      cpu: 0.3
+      memory: 250Mi
+
+alertmanager:
+  ingresshost: "alertmanager.momo-store.cloudns.ph"
+  bot_token: $bot_token
+  chat_id: $chat_id
+  resources:
+    requests:
+      cpu: 0.1
+      memory: 100Mi
+    limits:
+      cpu: 0.2
+      memory: 200Mi

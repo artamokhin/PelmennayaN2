@@ -56,9 +56,4 @@ spec:
           mountPath: /etc/prometheus/
           readOnly: true
         resources:
-          requests:
-            cpu: 0.1
-            memory: 100Mi
-          limits:
-            cpu: 0.2
-            memory: 200Mi
+{{ toYaml .Values.resources | indent 12}}

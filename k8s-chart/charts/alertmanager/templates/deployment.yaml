@@ -28,9 +28,7 @@ spec:
           - '--config.file=/etc/alertmanager/alertmanager.yml'
           - '--storage.path=/alertmanager'
         resources:
-          limits:
-            cpu: 0.5
-            memory: 256Mi
+{{ toYaml .Values.resources | indent 12}}
         volumeMounts:
         - name: config-volume
           mountPath: /etc/alertmanager
