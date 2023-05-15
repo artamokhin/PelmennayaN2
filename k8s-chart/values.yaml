@@ -48,6 +48,8 @@ grafana:
 
 alertmanager:
   ingresshost: "alertmanager.momo-store.cloudns.ph"
+  bot_token: REPLACE_1
+  chat_id: REPLACE_2
   resources:
     requests:
       cpu: 0.1
@@ -56,5 +58,3 @@ alertmanager:
       cpu: 0.2
       memory: 200Mi
 
-bot_token: REPLACE_1
-chat_id: REPLACE_2
