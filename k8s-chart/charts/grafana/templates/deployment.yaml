@@ -42,16 +42,15 @@ spec:
             tcpSocket:
               port: 3000
             timeoutSeconds: 1
-          values:
-            - datasources:
-                datasources.yaml:
-                  apiVersion: 1
-                  datasources:
-                    - name: Prometheus
-                      type: prometheus
-                      access: proxy
-                      url: http://prometheus:9090
-                      isDefault: true
+          datasources:
+            datasources.yaml:
+              apiVersion: 1
+              datasources:
+                - name: Default
+                  type: prometheus
+                  url: http://prometheus:9090
+                  access: proxy
+                  isDefault: true
           resources:
 {{ toYaml .Values.resources | indent 12}}
       volumes:

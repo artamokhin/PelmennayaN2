@@ -6,5 +6,5 @@ metadata:
   labels:
     grafana_dashboard: "1"
 data:
-  kubernetes.json: |
+  Momo-store.json: |
 {{ .Files.Get "dashboards/Momo-store.json" | indent 4 }}
