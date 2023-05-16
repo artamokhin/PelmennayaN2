@@ -46,33 +46,6 @@ grafana:
       cpu: 0.3
       memory: 250Mi
 
-  dashboardProviders:
-   dashboardproviders.yaml:
-     apiVersion: 1
-     providers:
-     - name: 'default'
-       orgId: 1
-       folder: ''
-       type: file
-       disableDeletion: false
-       editable: true
-       options:
-         path: /var/lib/grafana/dashboards/default
-
-  dashboards:
-    default:
-      kubernetes:
-        json: |
-          ${indent(10, file("${path.module}/dashboards/Momo-store.json"))}
-
-  datasources:
-    datasources.yaml:
-      apiVersion: 1
-      datasources:
-        - name: Prometheus
-          type: prometheus
-          url: http:prometheus:9090
-
 alertmanager:
   ingresshost: "alertmanager.momo-store.cloudns.ph"
   bot_token: REPLACE_FROM_GITLAB
