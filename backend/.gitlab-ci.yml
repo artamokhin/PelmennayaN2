@@ -81,6 +81,7 @@ deploy-backend:
       - backend/**/*
       - k8s-chart/**/*
   script:
+    - sleep 5
     - mkdir ~/.kube
     - echo ${kubeconfig} | base64 -d > ~/.kube/config
     - cd k8s-chart
