@@ -52,14 +52,6 @@ spec:
               value: grafana-piechart-panel
             - name: GF_DASHBOARDS_JSON_ENABLED
               value: "true"
-            - name: GF_DEFAULT_DASHBOARD_JSON
-              value: |
-                {
-                  "editable": false,
-                  "panels": [
-                    // Add your custom dashboard JSON configuration here
-                  ]
-                }
       volumes:
         - name: grafana-pv
           persistentVolumeClaim:
