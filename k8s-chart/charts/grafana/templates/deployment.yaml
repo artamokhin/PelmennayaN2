@@ -47,7 +47,6 @@ spec:
           volumeMounts:
             - mountPath: /var/lib/grafana
               name: grafana-pv
-
       volumes:
         - name: grafana-pv
           persistentVolumeClaim:

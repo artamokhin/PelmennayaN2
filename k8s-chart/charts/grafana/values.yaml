@@ -17,3 +17,11 @@ grafana:
       kubernetes:
         json: |
           ${indent(8, file("./dashboards/Momo-store.json"))}
+
+  datasources:
+    datasources.yaml:
+      apiVersion: 1
+      datasources:
+        - name: Prometheus
+          type: prometheus
+          url: http:prometheus:9090
