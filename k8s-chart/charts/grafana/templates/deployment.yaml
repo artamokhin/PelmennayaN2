@@ -18,7 +18,7 @@ spec:
           - 0
       containers:
         - name: grafana
-          image: grafana/grafana:8.4.4
+          image: grafana/grafana:9.5.2
           imagePullPolicy: IfNotPresent
           ports:
             - containerPort: 3000
@@ -56,21 +56,8 @@ spec:
                   editable: true
                   options:
                     path: /var/lib/grafana/dashboards/default
-          dashboards:
-            default:
-              kubernetes:
-                json: |
-${indent(18, file("${path.module}/dashboards/Momo-store.json"))}
-          datasources:
-            datasources.yaml:
-              apiVersion: 1
-              datasources:
-                - name: Prometheus
-                  type: prometheus
-                  url: http:prometheus:9090
-          volumeMounts:
-            - mountPath: /var/lib/grafana
-              name: grafana-pv
+          dashboardsConfigMaps:
+            default: "grafana-dashboards"
       volumes:
         - name: grafana-pv
           persistentVolumeClaim:
