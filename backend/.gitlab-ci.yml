@@ -99,7 +99,7 @@ deploy-backend:
       fi
 # установка основного пакета с параметрами
     - >
-      helm upgrade --install --atomic --timeout 5m momo-store nexus/momo-store
+      helm upgrade --install --atomic --timeout 3m momo-store nexus/momo-store
       --set-string alertmanager.chat_id="${CHAT_ID}"
       --set-string alertmanager.bot_token="${BOT_TOKEN}"
       --set-string dockerconfigjson="${dockerconfigjson}"
