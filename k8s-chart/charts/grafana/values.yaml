@@ -10,7 +10,7 @@ grafana:
        disableDeletion: false
        editable: true
        options:
-         path: /var/lib/grafana/dashboards/default
+         path: /usr/share/grafana/conf/provisioning/dashboards
 
   dashboards:
     default:
