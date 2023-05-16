@@ -42,22 +42,18 @@ spec:
             tcpSocket:
               port: 3000
             timeoutSeconds: 1
+          values:
+            - datasources:
+                datasources.yaml:
+                  apiVersion: 1
+                  datasources:
+                    - name: Prometheus
+                      type: prometheus
+                      access: proxy
+                      url: http://prometheus:9090
+                      isDefault: true
           resources:
 {{ toYaml .Values.resources | indent 12}}
-          dashboardProviders:
-            dashboardproviders.yaml:
-              apiVersion: 1
-              providers:
-                - name: 'default'
-                  orgId: 1
-                  folder: ''
-                  type: file
-                  disableDeletion: false
-                  editable: true
-                  options:
-                    path: /var/lib/grafana/dashboards/default
-          dashboardsConfigMaps:
-            default: "grafana-dashboards"
       volumes:
         - name: grafana-pv
           persistentVolumeClaim:
