@@ -81,12 +81,12 @@ deploy-backend:
       - backend/**/*
       - k8s-chart/**/*
   script:
-    - sleep 5
     - mkdir ~/.kube
     - echo ${kubeconfig} | base64 -d > ~/.kube/config
     - cd k8s-chart
     - helm package ./ --version "1.0.${CI_PIPELINE_ID}"
     - curl -u $NEXUS_REPO_USER:$NEXUS_REPO_PASS $NEXUS_HELM_REPO --upload-file momo-store-1.0.${CI_PIPELINE_ID}.tgz
+    - sleep 5
     - helm repo add nexus $NEXUS_HELM_REPO --username $NEXUS_REPO_USER --password $NEXUS_REPO_PASS
     - helm repo add ingress-nginx https://kubernetes.github.io/ingress-nginx
     - helm repo update
