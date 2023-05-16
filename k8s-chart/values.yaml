@@ -58,5 +58,4 @@ alertmanager:
       cpu: 0.2
       memory: 200Mi
 
-secret:
-  dockerconfigjson: REPLACE_FROM_GITLAB
+dockerconfigjson: REPLACE_FROM_GITLAB
