@@ -52,19 +52,19 @@ grafana:
       dashboardproviders.yaml:
         apiVersion: 1
         providers:
-        - name: 'default'
-          orgId: 1
-          folder: ''
-          type: file
-          disableDeletion: false
-          editable: true
-          options:
-            path: /var/lib/grafana/dashboards
+          - name: 'default'
+            orgId: 1
+            folder: ''
+            type: file
+            disableDeletion: false
+            editable: true
+            options:
+              path: /var/lib/grafana/dashboards
     dashboards:
       default:
         kubernetes:
           json: |
-{{ toYaml grafana/dashboards/kubernetes.json | indent 12 }}
+            {{ toYaml grafana/dashboards/kubernetes.json | indent 12 }}
     datasources:
       datasources.yaml:
         apiVersion: 1
