@@ -47,15 +47,9 @@ spec:
           volumeMounts:
             - mountPath: /var/lib/grafana
               name: grafana-pv
-          env:
-            - name: GF_INSTALL_PLUGINS
-              value: grafana-piechart-panel
-            - name: GF_DASHBOARDS_JSON_ENABLED
-              value: "true"
+
       volumes:
         - name: grafana-pv
           persistentVolumeClaim:
             claimName: grafana-pvc
-        - name: grafana-dashboards
-          configMap:
-              name: grafana-dashboard-config
+
