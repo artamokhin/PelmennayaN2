@@ -89,6 +89,12 @@ deploy-backend:
     - helm repo add nexus $NEXUS_HELM_REPO --username $NEXUS_REPO_USER --password $NEXUS_REPO_PASS
     - helm repo add ingress-nginx https://kubernetes.github.io/ingress-nginx
     - helm repo update
-    - helm upgrade --install ingress-nginx ingress-nginx/ingress-nginx | true
-    - helm upgrade --install --atomic --timeout 2m momo-store nexus/momo-store --set-string alertmanager.chat_id="$CHAT_ID" --set-string alertmanager.bot_token="$BOT_TOKEN" --set-string dockerconfigjson="$dockerconfigjson"
+    - helm upgrade --install --atomic --timeout 5m ingress-nginx ingress-nginx/ingress-nginx
+    - |
+      if helm status ingress-nginx > /dev/null 2>&1; then
+        echo "Chart already exists, skipping installation"
+      else
+        helm install ingress-nginx ingress-nginx/ingress-nginx
+      fi
+    - helm upgrade --install --atomic --timeout 5m momo-store nexus/momo-store --set-string alertmanager.chat_id="$CHAT_ID" --set-string alertmanager.bot_token="$BOT_TOKEN" --set-string dockerconfigjson="$dockerconfigjson"
     - rm ~/.kube/config
