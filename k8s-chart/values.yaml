@@ -58,3 +58,4 @@ alertmanager:
       cpu: 0.2
       memory: 200Mi
 
+dockerconfigjson: REPLACE_3
