@@ -58,8 +58,8 @@ grafana:
 
 alertmanager:
   ingresshost: "alertmanager.momo-store.cloudns.ph"
-  bot_token: REPLACE_1
-  chat_id: REPLACE_2
+  bot_token: REPLACE_FROM_GITLAB
+  chat_id: REPLACE_FROM_GITLAB
   resources:
     requests:
       cpu: 0.1
@@ -68,4 +68,5 @@ alertmanager:
       cpu: 0.2
       memory: 200Mi
 
-dockerconfigjson: REPLACE_3
+secret:
+  dockerconfigjson: REPLACE_FROM_GITLAB
