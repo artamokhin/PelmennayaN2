@@ -47,6 +47,7 @@ grafana:
     limits:
       cpu: 0.3
       memory: 250Mi
+
   dashboardProviders:
     dashboardproviders.yaml:
       apiVersion: 1
