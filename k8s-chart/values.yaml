@@ -45,16 +45,6 @@ grafana:
     limits:
       cpu: 0.3
       memory: 250Mi
-  enabled: true
-  sidecar:
-    dashboards:
-      enabled: true
-      label: grafana_dashboard
-      searchNamespace: true
-      searchLabel: grafana_dashboard
-      configMaps:
-        - name: grafana-dashboards
-          mountPath: /var/lib/grafana/dashboards
 
 alertmanager:
   ingresshost: "alertmanager.momo-store.cloudns.ph"

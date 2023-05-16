@@ -96,5 +96,9 @@ deploy-backend:
       else
         helm install ingress-nginx ingress-nginx/ingress-nginx
       fi
-    - helm upgrade --install --atomic --timeout 5m momo-store nexus/momo-store --set-string alertmanager.chat_id="$CHAT_ID" --set-string alertmanager.bot_token="$BOT_TOKEN" --set-string dockerconfigjson="$dockerconfigjson"
+    - >
+      helm upgrade --install --atomic --timeout 5m momo-store nexus/momo-store
+      --set-string alertmanager.chat_id="$CHAT_ID"
+      --set-string alertmanager.bot_token="$BOT_TOKEN"
+      --set-string dockerconfigjson="$dockerconfigjson"
     - rm ~/.kube/config
