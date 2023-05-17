@@ -48,4 +48,14 @@ spec:
         - name: grafana-pv
           persistentVolumeClaim:
             claimName: grafana-pvc
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: grafana-dashboards
+  labels:
+    grafana_dashboard: "1"
+data:
+  kubernetes.json: |
+{{ .Files.Get "./dashboards/kubernetes.json" | indent 4 }}
 
