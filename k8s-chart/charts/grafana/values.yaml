@@ -11,7 +11,7 @@ grafana:
           updateIntervalSeconds: 15
           editable: true
           options:
-            path: /var/lib/grafana/default/dashboards
+            path: /etc/grafana/provisioning/default/dashboards
   datasources:
     datasources.yaml:
       apiVersion: 1
