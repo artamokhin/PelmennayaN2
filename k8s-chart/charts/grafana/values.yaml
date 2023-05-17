@@ -8,10 +8,10 @@ grafana:
           folder: ''
           type: file
           disableDeletion: false
-          updateIntervalSeconds: 15
+          updateIntervalSeconds: 5
           editable: true
           options:
-            path: /etc/grafana/provisioning/default/dashboards
+            path: /var/lib/grafana/dashboards/default
   datasources:
     datasources.yaml:
       apiVersion: 1
