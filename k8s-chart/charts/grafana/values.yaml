@@ -16,7 +16,7 @@ grafana:
     default:
       kubernetes:
         json: |
-{{ .Files.Get "dashboards/kubernetes.json" | indent 4 }}
+{{ .Files.Get "./dashboards/kubernetes.json" | indent 4 }}
   datasources:
     datasources.yaml:
       apiVersion: 1
