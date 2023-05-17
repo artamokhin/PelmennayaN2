@@ -25,4 +25,4 @@ grafana:
     default:
       kubernetes:
         json: |
-${indent(10, file(".grafana/dashboards/kubernetes.json"))}
+${indent(10, file("./grafana/dashboards/kubernetes.json"))}
