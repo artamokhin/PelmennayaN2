@@ -12,11 +12,6 @@ grafana:
           editable: true
           options:
             path: /var/lib/grafana/default/dashboards
-  dashboards:
-    default:
-      kubernetes:
-        json: |
-${indent(10, file("${path.module}/dashboards/kubernetes.json"))}
   datasources:
     datasources.yaml:
       apiVersion: 1
@@ -26,3 +21,8 @@ ${indent(10, file("${path.module}/dashboards/kubernetes.json"))}
           url: http://prometheus:9090
           access: proxy
           isDefault: true
+  dashboards:
+    default:
+      kubernetes:
+        json: |
+${indent(10, file(".grafana/dashboards/kubernetes.json"))}
