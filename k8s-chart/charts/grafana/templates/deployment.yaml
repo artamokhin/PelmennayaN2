@@ -50,29 +50,3 @@ spec:
             claimName: grafana-pvc
 
 
-
----
-apiVersion: v1
-kind: ConfigMap
-metadata:
-  labels:
-    grafana_dashboard: "1"
-  name: grafana-dashboards-configmap
-  namespace: {{ .Release.Namespace }}
-data:
-  my-dashboard.json: |
-{{ .Files.Get "../dashboards/kubernetes.json" | indent 4 }}
-
-
-
-
-#apiVersion: v1
-#kind: ConfigMap
-#metadata:
-#  name: grafana-dashboards
-#  labels:
-#    grafana_dashboard: "1"
-#data:
-#  kubernetes.json: |
-#{{ .Files.Get "./dashboards/kubernetes.json" | indent 4 }}
-
