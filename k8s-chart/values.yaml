@@ -39,9 +39,9 @@ prometheus:
 
 
 
-Grafana-ingresshost: "grafana.momo-store.cloudns.ph"
+GrafanaIngresshost: "grafana.momo-store.cloudns.ph"
 
-Grafana-resources:
+GrafanaRresources:
   requests:
     cpu: 0.1
     memory: 100Mi
@@ -89,8 +89,6 @@ alertmanager:
     limits:
       cpu: 0.2
       memory: 200Mi
-
-
 
 
 dockerconfigjson: REPLACE_FROM_GITLAB
