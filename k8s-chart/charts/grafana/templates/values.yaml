@@ -1,4 +1,5 @@
 grafana:
+  enabled: true
   provisioning:
     datasources.yaml:
       apiVersion: 1
@@ -8,16 +9,16 @@ grafana:
           url: http://prometheus:9090
           access: proxy
           isDefault: true
-    dashboardProviders:
-      dashboardproviders.yaml:
-        apiVersion: 1
-        providers:
-          - name: 'default'
-            orgId: 1
-            folder: ''
-            type: file
-            disableDeletion: false
-            updateIntervalSeconds: 5
-            editable: true
-            options:
-              path: /var/lib/grafana/dashboards/default
+  dashboardProviders:
+    dashboardproviders.yaml:
+      apiVersion: 1
+      providers:
+        - name: 'default'
+          orgId: 1
+          folder: ''
+          type: file
+          disableDeletion: false
+          updateIntervalSeconds: 5
+          editable: true
+          options:
+            path: /var/lib/grafana/dashboards/default
