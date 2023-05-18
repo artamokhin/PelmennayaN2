@@ -39,15 +39,7 @@ prometheus:
 
 
 
-GrafanaIngresshost: "grafana.momo-store.cloudns.ph"
 
-GrafanaRresources:
-  requests:
-    cpu: 0.1
-    memory: 100Mi
-  limits:
-    cpu: 0.3
-    memory: 250Mi
 
 grafana:
   datasources:
@@ -76,6 +68,14 @@ grafana:
       custom-dashboard:
         # This is a path to a file inside the dashboards directory inside the chart directory
         file: dashboards/kubernetes.json
+  GrafanaIngresshost: "grafana.momo-store.cloudns.ph"
+  GrafanaResources:
+    requests:
+      cpu: 0.1
+      memory: 100Mi
+    limits:
+      cpu: 0.3
+      memory: 250Mi
 
 
 alertmanager:

@@ -43,7 +43,7 @@ spec:
               port: 3000
             timeoutSeconds: 1
           resources:
-{{ toYaml .Values.GrafanaRresources | indent 12}}
+{{ toYaml .Values.GrafanaResources | indent 12}}
       volumes:
         - name: grafana-pv
           persistentVolumeClaim:
