@@ -24,7 +24,7 @@
   "editable": true,
   "fiscalYearStartMonth": 0,
   "graphTooltip": 0,
-  "id": 1,
+  "id": 2,
   "links": [
     {
       "asDropdown": false,
@@ -42,10 +42,7 @@
   "liveNow": false,
   "panels": [
     {
-      "datasource": {
-        "type": "prometheus",
-        "uid": "c97vAdUVz"
-      },
+      "datasource": {},
       "fieldConfig": {
         "defaults": {
           "color": {
@@ -124,10 +121,12 @@
             "type": "prometheus",
             "uid": "c97vAdUVz"
           },
+          "editorMode": "code",
           "exemplar": true,
           "expr": "rate(response_timing_ms_count{}[1m])",
           "interval": "",
           "legendFormat": "",
+          "range": true,
           "refId": "A"
         }
       ],
@@ -135,10 +134,7 @@
       "type": "timeseries"
     },
     {
-      "datasource": {
-        "type": "prometheus",
-        "uid": "c97vAdUVz"
-      },
+      "datasource": {},
       "fieldConfig": {
         "defaults": {
           "color": {
@@ -216,10 +212,12 @@
             "type": "prometheus",
             "uid": "c97vAdUVz"
           },
+          "editorMode": "code",
           "exemplar": true,
           "expr": "up{}",
           "interval": "",
           "legendFormat": "",
+          "range": true,
           "refId": "A"
         }
       ],
@@ -227,10 +225,7 @@
       "type": "timeseries"
     },
     {
-      "datasource": {
-        "type": "prometheus",
-        "uid": "c97vAdUVz"
-      },
+      "datasource": {},
       "fieldConfig": {
         "defaults": {
           "color": {
@@ -308,10 +303,12 @@
             "type": "prometheus",
             "uid": "c97vAdUVz"
           },
+          "editorMode": "code",
           "exemplar": true,
           "expr": "rate(requests_count{}[1m])",
           "interval": "",
           "legendFormat": "",
+          "range": true,
           "refId": "A"
         }
       ],
