@@ -72,12 +72,13 @@
       - SonarQubeProjectMomoBackend (линк на проект бэкенда)
       - SonarQubeToken
       - SonarQubeUrl
+    - Переменные для хранилища артефактов Nexus
       - NEXUS_HELM_REPO
       - NEXUS_REPO_PASS
       - NEXUS_REPO_USER
-      - dockerconfigjson (Секрет (в base64 формате), необходимый, чтобы взаимодействовать с Docker Registry в GitLab)
-      - CHAT_ID (ID чата телеграм для отправки сообщений)
-      - BOT_TOKEN (токен для доступа в телеграм)
+    - dockerconfigjson (Секрет (в base64 формате), необходимый, чтобы взаимодействовать с Docker Registry в GitLab)
+    - CHAT_ID (ID чата телеграм для отправки сообщений)
+    - BOT_TOKEN (токен для доступа в телеграм)
 - DNS
   - На сайте https://www.cloudns.net/ создайте доменные записи типа А с IP адресом Ingress контроллера (узнать можно с помощью команды: kubectl get ingress)
       - momo-store.cloudns.ph
