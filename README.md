@@ -31,6 +31,10 @@
   - Войдите или создайте учетную запись в Яндекс [облаке](https://cloud.yandex.ru/)
   - Установите интерфейс командной строки [Yandex Cloud (CLI)](https://cloud.yandex.ru/docs/cli/quickstart#install)
   - Получите данные для аутентификации в облаке для управления инфраструктурой  с помощью [Terraform](https://cloud.yandex.ru/docs/tutorials/infrastructure-management/terraform-quickstart#get-credentials)
+  - В консоли управления облаком создайте S3 бакеты:
+    - с именем terraform-momo-store для хранения статуса terraform
+    - с именем momo-store-artamokhin-aleksandr для хранения картинок с сайта Пельменной
+  - Создайте сервисного [пользователя](https://cloud.yandex.ru/docs/iam/concepts/users/service-accounts) и статический ключ для него (нужен для файла backend.tf в папке terraform)
 - Создание инфраструктуры с помощью terraform
   - Скачайте Terraform из зеркала [Yandex.Cloud](https://hashicorp-releases.yandexcloud.net/terraform/)
   - После загрузки добавьте путь к папке с исполняемым файлом в переменную PATH:
@@ -74,6 +78,11 @@
       - dockerconfigjson (Секрет (в base64 формате), необходимый, чтобы взаимодействовать с Docker Registry в GitLab)
       - CHAT_ID (ID чата телеграм для отправки сообщений)
       - BOT_TOKEN (токен для доступа в телеграм)
+- DNS
+  - На сайте https://www.cloudns.net/ создайте доменные записи типа А с IP адресом Ingress контроллера (узнать можно с помощью команды: kubectl get ingress)
+      - momo-store.cloudns.ph
+      - grafana.momo-store.cloudns.ph
+      - prometheus.momo-store.cloudns.ph
 - Запуск CI/CD происходит:
   - в случае изменений в папках backend и frontend по полному циклу со сборкой и разворачиванием Helm чарта в k8s кластер
   - при изменениях в папке k8s-chart - только стадия Deploy из папки backend
