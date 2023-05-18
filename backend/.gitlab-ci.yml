@@ -102,5 +102,5 @@ deploy-backend:
       helm upgrade --install --atomic --timeout 3m momo-store nexus/momo-store
       --set-string alertmanager.chat_id="${CHAT_ID}"
       --set-string alertmanager.bot_token="${BOT_TOKEN}"
-      --set-string dockerconfigjson="${dockerconfigjson}"
+      --set dockerconfigjson="${dockerconfigjson}"
     - rm ~/.kube/config
