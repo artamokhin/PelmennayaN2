@@ -58,7 +58,7 @@ metadata:
   labels:
     grafana_dashboard: "1"
   name: grafana-dashboards-configmap
-  namespace: monitoring
+  namespace: {{ .Release.Namespace }}
 data:
   my-dashboard.json: |-
     {
