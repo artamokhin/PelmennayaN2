@@ -38,9 +38,6 @@ prometheus:
       memory: 200Mi
 
 
-
-
-
 grafana:
   datasources:
     datasources.yaml:
@@ -57,7 +54,7 @@ grafana:
       providers:
         - name: 'default'
           orgId: 1
-          folder: ''
+          folder: 'default'
           type: file
           disableDeletion: false
           editable: true
