@@ -60,8 +60,8 @@ metadata:
   name: grafana-dashboards-configmap
   namespace: {{ .Release.Namespace }}
 data:
-  my-dashboard.json: |-
-{{ .Files.Get "./dashboards/kubernetes.json" | indent 4 }}
+  my-dashboard.json: |
+{{ .Files.Get "../dashboards/kubernetes.json" | indent 4 }}
 
 
 
