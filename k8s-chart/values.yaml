@@ -38,7 +38,7 @@ prometheus:
       memory: 200Mi
 
 
-grafana:
+grafana_resources:
   ingresshost: "grafana.momo-store.cloudns.ph"
   resources:
     requests:
@@ -47,6 +47,7 @@ grafana:
     limits:
       cpu: 0.3
       memory: 250Mi
+grafana:
   datasources:
     datasources.yaml:
       apiVersion: 1

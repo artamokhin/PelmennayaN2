@@ -13,10 +13,10 @@ spec:
   ingressClassName: "nginx"
   tls:
     - hosts:
-      - {{ .Values.ingresshost }}
+      - {{ .Values.grafana_resources.ingresshost }}
       secretName: grafana-letsencrypt
   rules:
-  - host: {{ .Values.ingresshost }}
+  - host: {{ .Values.grafana_resources.ingresshost }}
     http:
       paths:
       - path: /
