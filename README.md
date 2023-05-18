@@ -5,7 +5,7 @@
 ## Ссылки для проверки проекта
 - Сайт [Пельменной](https://momo-store.cloudns.ph/catalog)
 - Панель [Grafana](https://grafana.momo-store.cloudns.ph/d/9rfE_dU4z/pel-mennaja?orgId=1&refresh=5s)
-- Панель [Prometheus](https://prometheus.momo-store.cloudns.ph)
+- Панель [Prometheus](https://prometheus.momo-store.cloudns.ph/targets?search=)
 
 ## Структура репозитория по папкам
 
