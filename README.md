@@ -35,7 +35,7 @@
     - с именем terraform-momo-store для хранения статуса terraform
     - с именем momo-store-artamokhin-aleksandr для хранения картинок с сайта Пельменной
   - Создайте сервисного [пользователя](https://cloud.yandex.ru/docs/iam/concepts/users/service-accounts) и статический ключ для него (нужен для файла backend.tf в папке terraform)
-- Создание инфраструктуры с помощью terraform
+- Terraform
   - Скачайте Terraform из зеркала [Yandex.Cloud](https://hashicorp-releases.yandexcloud.net/terraform/)
   - После загрузки добавьте путь к папке с исполняемым файлом в переменную PATH:
   >export PATH=$PATH:/path/to/terraform
