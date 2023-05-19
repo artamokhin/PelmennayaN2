@@ -54,7 +54,7 @@
   }
   ```
   - Перейдите в папку terraform/momo-store и запустите команды:
-    - export TF_VAR_S3secret_key=***REMOVED***
+    - export TF_VAR_S3secret_key=<секретная часть статического ключа сервисного пользователя>
     - terraform init -backend-config "secret_key=$TF_VAR_S3secret_key"
     - terraform plan (убедитесь в правильности конфигурации)
     - terraform apply
@@ -88,9 +88,9 @@
     - Скачайте нужный  образ с докерхаба:
     > docker pull alpine:3.15.0 
     - Измените тег:
-    >docker tag alpine:3.15.0 gitlab.praktikum-services.ru:5050/std-012-056/sausage-store/alpine:3.15.0
+    > docker tag alpine:3.15.0 gitlab.praktikum-services.ru:5050/std-012-056/sausage-store/alpine:3.15.0
     - Отправьте образ в репозиторий Gitlab:
-    >docker push gitlab.praktikum-services.ru:5050/std-012-056/sausage-store/alpine:3.15.0
+    > docker push gitlab.praktikum-services.ru:5050/std-012-056/sausage-store/alpine:3.15.0
 
 - DNS
   - На сайте https://www.cloudns.net/ создайте доменные записи типа А с IP адресом Ingress контроллера (узнать можно с помощью команды: kubectl get ingress)
@@ -102,7 +102,7 @@
   - в случае изменений в папках backend и frontend по полному циклу со сборкой и разворачиванием Helm чарта в k8s кластер
   - при изменениях в папке k8s-chart - только стадия Deploy из папки backend
 - Grafana
-  - Зайдите в панель управления [Grafana](https://grafana.momo-store.cloudns.ph) 
+  - Зайдите в панель управления [Grafana](https://grafana.momo-store.cloudns.ph/d/9rfE_dU4z/pel-mennaja?orgId=1&refresh=5s) 
   - Добавьте источник данных в меню Connections - Your connections - Data sources - add new - Prometheus
     - url: http://prometheus:9090
   - Выберите пункт меню Dashboards-New-Import и в поле "Import via panel json" вставьте JSON код из файла grafana/dashboards/kubernetes.json
