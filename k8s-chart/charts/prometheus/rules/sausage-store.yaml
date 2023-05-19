@@ -1,0 +1,14 @@
+---
+groups:
+  - name: Sausage store rules
+    rules:
+    - alert: InstanceDown
+      expr: up{app="backend"} == 0
+      for: 1m
+      labels:
+        severity: critical
+        project: "sausage_store"
+        component: "Backend"
+      annotations:
+        summary: 'Backend не работает'
+        description: 'Поды бэкенда Пельменной №2 недоступны'

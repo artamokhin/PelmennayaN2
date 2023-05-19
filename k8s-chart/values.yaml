@@ -1,0 +1,92 @@
+backend:
+  image: gitlab.praktikum-services.ru:5050/std-012-056/momo-store/momo-backend
+  tag: latest
+  replicas: 2
+  resources:
+    requests:
+      memory: "50Mi"
+      cpu: 0.1
+    limits:
+      memory: "100Mi"
+      cpu: 0.2
+  environment: production
+
+
+frontend:
+  image: gitlab.praktikum-services.ru:5050/std-012-056/momo-store/momo-frontend
+  tag: latest
+  replicas: 2
+  ingresshost: "momo-store.cloudns.ph"
+  resources:
+    requests:
+      memory: "100Mi"
+      cpu: 0.1
+    limits:
+      memory: "250Mi"
+      cpu: 0.5
+  environment: production
+
+
+prometheus:
+  ingresshost: "prometheus.momo-store.cloudns.ph"
+  resources:
+    requests:
+      cpu: 0.1
+      memory: 100Mi
+    limits:
+      cpu: 0.2
+      memory: 200Mi
+
+
+grafana:
+#  Автоматическое подключение prometheus и Dashboard (пока не работает :()
+#  datasources:
+#    datasources.yaml:
+#      apiVersion: 1
+#      datasources:
+#        - name: Prometheus
+#          type: prometheus
+#          url: http://prometheus:9090
+#          access: proxy
+#          isDefault: true
+#  dashboardProviders:
+#    dashboardproviders.yaml:
+#      apiVersion: 1
+#      providers:
+#        - name: 'default'
+#          orgId: 1
+#          folder: 'default'
+#          type: file
+#          disableDeletion: false
+#          editable: true
+#          options:
+#            path: /var/lib/grafana/dashboards/default
+#  dashboards:
+#    default:
+#      custom-dashboard:
+#        # This is a path to a file inside the dashboards directory inside the chart directory
+#        file: dashboards/kubernetes.json
+  GrafanaIngresshost: "grafana.momo-store.cloudns.ph"
+  GrafanaResources:
+    requests:
+      cpu: 0.1
+      memory: 100Mi
+    limits:
+      cpu: 0.3
+      memory: 250Mi
+
+
+alertmanager:
+  ingresshost: "alertmanager.momo-store.cloudns.ph"
+  bot_token: REPLACE_FROM_GITLAB
+  chat_id: REPLACE_FROM_GITLAB
+  resources:
+    requests:
+      cpu: 0.1
+      memory: 100Mi
+    limits:
+      cpu: 0.2
+      memory: 200Mi
+
+
+dockerconfigjson: REPLACE_FROM_GITLAB

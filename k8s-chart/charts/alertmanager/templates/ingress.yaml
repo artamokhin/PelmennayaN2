@@ -1,0 +1,28 @@
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: alertmanager
+  namespace: {{ .Release.Namespace }}
+  labels:
+    app: alertmanager
+  annotations:
+    cert-manager.io/cluster-issuer: "letsencrypt"
+    nginx.ingress.kubernetes.io/rewrite-target: /
+spec:
+  ingressClassName: "nginx"
+  tls:
+    - hosts:
+      - {{ .Values.ingresshost }}
+      secretName: letsencrypt-alertmanager
+  rules:
+  - host: {{ .Values.ingresshost }}
+    http:
+      paths:
+      - path: /
+        pathType: Prefix
+        backend:
+          service:
+            name: alertmanager
+            port:
+              number: 9093

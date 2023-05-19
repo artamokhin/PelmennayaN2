@@ -1,0 +1,76 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: backend
+  namespace: {{ .Release.Namespace }}
+  labels:
+    app.kubernetes.io/name: backend
+    app.kubernetes.io/instance: "{{ .Release.Name }}"
+    app.kubernetes.io/version: "{{ .Chart.AppVersion }}"
+    app.kubernetes.io/managed-by: {{ .Release.Service }}
+    helm.sh/chart: "{{ .Chart.Name }}-{{ .Chart.Version }}"
+    app.kubernetes.io/component: backend
+    app.kubernetes.io/part-of: momo-store
+    env: "{{ .Values.environment }}"
+
+
+spec:
+  replicas: {{ .Values.replicas }}
+  revisionHistoryLimit: 15
+  # Стратегия развёртывания. Recreate — удалит сначала все старые Pod'ы
+  # Есть и более гибкая стратегии, например, RollingUpdate, которая будет обновлять Pod'ы порциями
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxUnavailable: 0
+      maxSurge: 20%
+  selector:
+    matchLabels:
+      app: backend
+  template:
+    metadata:
+      annotations:
+        prometheus.io/path: /metrics
+        prometheus.io/port: "8081"
+        prometheus.io/scrape: "true"
+      labels:
+        app: backend
+    spec:
+      containers:
+        - name: backend
+          image: "{{ .Values.image }}:{{.Values.tag }}"
+          imagePullPolicy: Always
+          resources:
+{{ toYaml .Values.resources | indent 12 }}
+          ports:
+            - name: backend
+              containerPort: 8081
+          livenessProbe:
+            httpGet:
+              path: /health
+              port: 8081
+      imagePullSecrets:
+        - name: docker-config-secret
+
+---
+apiVersion: autoscaling/v2
+kind: HorizontalPodAutoscaler
+metadata:
+  name: backend-hpa
+  labels:
+    app: backend-hpa
+spec:
+  minReplicas: 2
+  maxReplicas: 5
+  scaleTargetRef:
+    apiVersion: apps/v1
+    kind: Deployment
+    name: backend
+  metrics:
+    - type: Resource
+      resource:
+        name: cpu
+        target:
+          type: Utilization
+          averageUtilization: 75
