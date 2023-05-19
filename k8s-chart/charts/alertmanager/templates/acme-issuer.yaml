@@ -8,7 +8,7 @@ spec:
     server: https://acme-v02.api.letsencrypt.org/directory
     email: artamokhin1@yandex.ru
     privateKeySecretRef:
-      name: alertmanager-letsencrypt
+      name: letsencrypt-alertmanager
     solvers:
     - http01:
         ingress:
