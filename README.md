@@ -81,6 +81,16 @@
     - dockerconfigjson (Секрет (в base64 формате), необходимый, чтобы взаимодействовать с Docker Registry в GitLab)
     - CHAT_ID (ID чата телеграм для отправки сообщений)
     - BOT_TOKEN (токен для доступа в телеграм)
+  - Скачайте Docker образы с Dockerhub в репозиторий Gitlab для избежания превышения лимитов на скачивание
+    - Укажите логин на личный репозиторий:
+    > docker login -u $login -p $password gitlab.praktikum-services.ru:5050/std-012-056/sausage-store
+    - Скачайте нужный  образ с докерхаба:
+    > docker pull alpine:3.15.0 
+    - Измените тег:
+    >docker tag alpine:3.15.0 gitlab.praktikum-services.ru:5050/std-012-056/sausage-store/alpine:3.15.0
+    - Отправьте образ в репозиторий Gitlab:
+    >docker push gitlab.praktikum-services.ru:5050/std-012-056/sausage-store/alpine:3.15.0
+
 - DNS
   - На сайте https://www.cloudns.net/ создайте доменные записи типа А с IP адресом Ingress контроллера (узнать можно с помощью команды: kubectl get ingress)
       - momo-store.cloudns.ph
