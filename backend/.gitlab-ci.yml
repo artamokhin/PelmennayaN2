@@ -97,6 +97,8 @@ deploy-backend:
       else
         helm install ingress-nginx ingress-nginx/ingress-nginx
       fi
+# Установка менеджера сертификатов
+    - kubectl apply -f https://github.com/jetstack/cert-manager/releases/download/v1.9.1/cert-manager.yaml
 # установка основного пакета с параметрами
     - >
       helm upgrade --install --atomic --timeout 10m momo-store nexus/momo-store
