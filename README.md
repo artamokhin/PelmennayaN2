@@ -53,8 +53,9 @@
     }
   }
   ```
-  - Перейдите в папку terraform/momo-store и запустите команды: 
-    - terraform init
+  - Перейдите в папку terraform/momo-store и запустите команды:
+    - export TF_VAR_S3secret_key=***REMOVED***
+    - terraform init -backend-config "secret_key=$TF_VAR_S3secret_key"
     - terraform plan (убедитесь в правильности конфигурации)
     - terraform apply
 - Kubernetes
