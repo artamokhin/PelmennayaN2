@@ -7,10 +7,9 @@ metadata:
   labels:
     app: alertmanager
   annotations:
+    kubernetes.io/ingress.class: "nginx"
     cert-manager.io/cluster-issuer: "letsencrypt"
-    nginx.ingress.kubernetes.io/rewrite-target: /
 spec:
-  ingressClassName: "nginx"
   tls:
     - hosts:
       - {{ .Values.ingresshost }}
