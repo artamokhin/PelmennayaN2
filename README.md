@@ -6,6 +6,7 @@
 - Сайт [Пельменной](https://momo-store.cloudns.ph/catalog)
 - Панель [Grafana](https://grafana.momo-store.cloudns.ph/d/9rfE_dU4z/pel-mennaja?orgId=1&refresh=5s)
 - Панель [Prometheus](https://prometheus.momo-store.cloudns.ph/targets?search=)
+- [Prometheus](https://prometheus.momo-store.cloudns.ph/targets?search=)alertmanager.momo-store.cloudns.ph
 
 ## Структура репозитория по папкам
 
@@ -85,8 +86,14 @@
       - momo-store.cloudns.ph
       - grafana.momo-store.cloudns.ph
       - prometheus.momo-store.cloudns.ph
+      - alertmanager.momo-store.cloudns.ph
 - Запуск CI/CD происходит:
   - в случае изменений в папках backend и frontend по полному циклу со сборкой и разворачиванием Helm чарта в k8s кластер
   - при изменениях в папке k8s-chart - только стадия Deploy из папки backend
+- Grafana
+  - Зайдите в панель управления [Grafana](https://grafana.momo-store.cloudns.ph) 
+  - Добавьте источник данных в меню Connections - Your connections - Data sources - add new - Prometheus
+    - url: http://prometheus:9090
+  - Выберите пункт меню Dashboards-New-Import и в поле "Import via panel json" вставьте JSON код из файла grafana/dashboards/kubernetes.json
 
 
