@@ -13,7 +13,7 @@ spec:
   ingressClassName: "nginx"
   tls:
     - hosts:
-      - {{ .Values.Ingresshost }}
+      - {{ .Values.ingresshost }}
       secretName: alertmanager-letsencrypt
   rules:
   - host: {{ .Values.ingresshost }}
