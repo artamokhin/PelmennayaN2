@@ -17,6 +17,3 @@ dependencies:
     version: 0.0.1
   - name: grafana
     version: 0.17.0
-  - name: magda-common
-    version: "2.1.1"
-    repository: "oci://ghcr.io/magda-io/charts"
