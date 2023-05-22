@@ -2,13 +2,13 @@
 variable "folder_id" {
   description = "The ID of the folder that the Kubernetes cluster belongs to."
   type        = string
-  default     = "***REMOVED***"
+  default     = ""
 }
 
 variable "network_id" {
   description = "The ID of the cluster network."
   type        = string
-  default     = "enpslampkiqml3fp5elu"
+  default     = ""
 }
 
 
