@@ -2,12 +2,6 @@
 
 <img width="900" alt="image" src="https://user-images.githubusercontent.com/9394918/167876466-2c530828-d658-4efe-9064-825626cc6db5.png">
 
-## Ссылки для проверки проекта
-- Сайт [Пельменной](https://momo-store.cloudns.ph/catalog)
-- Панель [Grafana](https://grafana.momo-store.cloudns.ph/d/9rfE_dU4z/pel-mennaja?orgId=1&refresh=5s)
-- Панель [Prometheus](https://prometheus.momo-store.cloudns.ph/targets?search=)
-- Панель [Alertmanager](https://alertmanager.momo-store.cloudns.ph)
-
 ## Структура репозитория по папкам
 
 - backend: 
